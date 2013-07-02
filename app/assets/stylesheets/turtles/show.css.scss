@@ -1,0 +1,27 @@
+.turtle {
+
+  div.turtle_contents {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+
+    p.turtle_name {
+      font-size: 64px;
+      line-height: 32px;
+      margin-top: 10px;
+    }
+
+    p.turtle_description {
+      display: inline-block;
+      margin-top: 20px;
+    }
+  }
+
+
+  img.turtle_img {
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+  }
+
+}

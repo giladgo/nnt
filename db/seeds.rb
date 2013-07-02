@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # Environment variables (ENV['...']) are set in the file config/application.yml.
 # See http://railsapps.github.io/rails-environment-variables.html
-puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-puts 'user: ' << user.name
+Turtle.create [
+    { :name => 'Bob', :description => 'A very lovely turtle, he likes to sing and eat tomatoes', :img_url => 'turtle1.jpg', :score => 10 },
+    { :name => 'Pip', :description => 'A turtle with a sense of humor. However, don\'t make fun of his shell, it\'s a sensitive subject for him', :img_url => 'turtle2.jpg', :score => 15 },
+              ]

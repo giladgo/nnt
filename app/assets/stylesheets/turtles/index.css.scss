@@ -1,0 +1,26 @@
+.turtle_item {
+  padding: 5px;
+  margin: 2px;
+  background-color: #ddd;
+
+  p.score {
+    display: inline-block;
+  }
+
+  p.item_text {
+    vertical-align: top;
+    display: inline-block;
+
+    a {
+      font-weight: bold;
+    }
+  }
+
+
+}
+
+.turtle_img {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}

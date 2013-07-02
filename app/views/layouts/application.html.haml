@@ -2,10 +2,12 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Nnt"
+      %title= content_for?(:title) ? yield(:title) : "Not Ninja Turtles"
       %meta{:content => content_for?(:description) ? yield(:description) : "Nnt", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
+        = stylesheet_link_tag "#{controller_name}/#{action_name}", :media => 'all'
         = javascript_include_tag "application"
+        = favicon_link_tag 'favicon.ico'
         = csrf_meta_tags
         = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
