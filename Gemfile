@@ -36,3 +36,32 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'bootstrap-sass'
+gem 'devise'
+gem 'haml-rails'
+gem 'mysql2'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'html2haml'
+  gem 'hub', :require=>nil
+  gem 'rb-fchange', :require=>false
+  gem 'rb-fsevent', :require=>false
+  gem 'rb-inotify', :require=>false
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'email_spec'
+end
+
