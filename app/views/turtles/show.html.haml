@@ -1,7 +1,15 @@
 .turtle
-  = image_tag @turtle.img_url, :class => 'turtle_img'
+  = image_tag @turtle.avatar.url(:medium), :class => 'turtle_img'
   .turtle_contents
     %h1><
       = @turtle.name
+    %h3
+      Current Score:
+      = @turtle.score
+    %h4
+      Submitted
+      = time_ago_in_words(@turtle.created_at)
+      by
+      = link_to @turtle.user.name, @turtle.user
     %p.turtle_description
       = @turtle.description

@@ -1,11 +1,15 @@
 %h1><
   Submit Your Turtle
-= form_for @turtle, url: {action: "create"}, html: {class: "nifty_form"} do |f|
-  .field
-    = f.label :name, "Your awesome pet turtle's name:"
-    = f.text_field :name
-  .field
-    = f.label :description, "Write a short description for you special friend:"
-    = f.text_field :description, size: "4x4"
-  .field
-    = f.submit "Submit Turtle"
+= form_for @turtle, url: {action: "create"}, html: {class: "nifty_form", multipart: true} do |f|
+  %fieldset
+    .field
+      = f.label :name, "Your awesome pet turtle's name:"
+      = f.text_field :name
+    .field
+      = f.label :description, "Write a short description for you special friend:"
+      = f.text_field :description, size: "4x4"
+    .field
+      = f.label :avatar, "Upload your turtle's picture:"
+      = f.file_field :avatar
+    .field
+      = f.submit "Submit Turtle"

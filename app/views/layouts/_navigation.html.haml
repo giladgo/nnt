@@ -2,5 +2,21 @@
 %ul.nav
   %li
     = link_to "Top Turtles", turtles_path
-  %li
-    = link_to "Submit", new_turtle_path
+  - if authenticated?
+    %li
+      = link_to "Submit", new_turtle_path
+  %li.divider-vertical
+  %li.navbar-text
+    Hello,
+    - if authenticated?
+      = current_user.name
+    - else
+      guest
+  - if not authenticated?
+    %li
+      = link_to "Login", login_path
+    %li
+      = link_to "Register", new_user_path
+  - else
+    %li
+      = link_to "Logout", logout_path, method: :delete

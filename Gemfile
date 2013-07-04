@@ -10,7 +10,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'haml-rails'
 gem 'mysql2'
-gem 'paperclip'
+gem 'paperclip', '~> 3.0'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
@@ -26,6 +26,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'debugger'
 end
 group :test do
   gem 'database_cleaner'

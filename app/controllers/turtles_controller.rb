@@ -10,4 +10,13 @@ class TurtlesController < ApplicationController
   def new
     @turtle = Turtle.new
   end
+
+  def create
+    @turtle = Turtle.new(params[:turtle])
+    if @turtle.save
+      redirect_to turtles_path
+    else
+      render action: "new"
+    end
+  end
 end

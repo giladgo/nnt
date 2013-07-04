@@ -1,0 +1,15 @@
+.turtle_item
+  %i.icon-arrow-up
+  %i.icon-arrow-down
+  %p.score
+    = turtle.score
+  = image_tag turtle.avatar.url(:thumb), :class => 'turtle_img'
+  %p.item_text
+    = link_to turtle.name, turtle
+    %span.details
+      Submitted
+      = time_ago_in_words(turtle.created_at)
+      by
+      = link_to turtle.user.name, turtle.user
+    %br
+    = turtle.description

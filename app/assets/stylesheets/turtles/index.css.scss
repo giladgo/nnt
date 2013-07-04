@@ -5,6 +5,8 @@
 
   p.score {
     display: inline-block;
+    width: 25px;
+    text-align: center;
   }
 
   p.item_text {
@@ -14,13 +16,15 @@
     a {
       font-weight: bold;
     }
-  }
 
+    span.details {
+      font-size: 10px;
+      color: #999;
+    }
+  }
 
 }
 
 .turtle_img {
-  width: 50px;
-  height: 50px;
   display: inline-block;
 }

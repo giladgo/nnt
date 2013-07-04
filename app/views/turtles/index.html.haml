@@ -1,17 +1,1 @@
-- for t in @turtles
-  .turtle_item
-    %i.icon-arrow-up
-    %i.icon-arrow-down
-    %p.score
-      = t.score
-    - if t.img_url
-      = image_tag t.img_url, :class => 'turtle_img'
-    %p.item_text
-      = link_to t.name, t
-      %br
-      = t.description
-
-%br
-%br
-
-= link_to 'Submit your pet turtle', new_turtle_path
+=render(@turtles)
