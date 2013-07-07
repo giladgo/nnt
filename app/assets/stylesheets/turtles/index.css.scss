@@ -23,8 +23,24 @@
     }
   }
 
+  a.upvote, a.downvote {
+    color: #999;
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.blue_arrow {
+      color: #66f; // !important;
+    }
+
+    &.red_arrow {
+      color: #f66; // !important;
+    }
+  }
+
 }
 
 .turtle_img {
   display: inline-block;
 }
+

@@ -6,6 +6,7 @@
       %meta{:content => content_for?(:description) ? yield(:description) : "Nnt", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = stylesheet_link_tag "#{controller_name}/#{action_name}", :media => 'all'
+        = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css", :media => "all"
         = javascript_include_tag "application"
         = favicon_link_tag 'favicon.ico'
         = csrf_meta_tags

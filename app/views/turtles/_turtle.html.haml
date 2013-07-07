@@ -1,6 +1,10 @@
-.turtle_item
-  %i.icon-arrow-up
-  %i.icon-arrow-down
+.turtle_item{ :clear_url => clearvote_turtle_path(turtle) }
+  - if authenticated?
+    = link_to upvote_turtle_path(turtle), method: :put, :class => ['upvote', turtle.user_upvoted(current_user) ? 'red_arrow' : nil] do
+      %i.icon-arrow-up
+    = link_to downvote_turtle_path(turtle), method: :put, :class => ['downvote', turtle.user_downvoted(current_user) ? 'blue_arrow' : nil] do
+      %i.icon-arrow-down
+  
   %p.score
     = turtle.score
   = image_tag turtle.avatar.url(:thumb), :class => 'turtle_img'
@@ -9,7 +13,7 @@
     %span.details
       Submitted
       = time_ago_in_words(turtle.created_at)
-      by
+      ago by
       = link_to turtle.user.name, turtle.user
     %br
     = turtle.description
