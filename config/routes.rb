@@ -1,13 +1,15 @@
 Nnt::Application.routes.draw do
   resources :turtles, only: [:index, :show, :create, :new] do
-    member do
-      put :upvote
-      put :downvote
-      put :clearvote
+    resources :votes, only: [:index]
+  end
+
+  resources :votes, only: [:create, :destroy]
+  
+  resources :users, only: [:show, :create, :new] do
+    collection do
+      get :current
     end
   end
-  
-  resources :users, only: [:show, :create, :new]
 
   controller :sessions do
     get 'login' => :new

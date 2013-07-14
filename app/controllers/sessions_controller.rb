@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts params
     user = User.find_by_name(params[:name])
     if user and user.authenticate(params[:password])
       sign_in user
@@ -16,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    logout
     redirect_to root_path
   end
 

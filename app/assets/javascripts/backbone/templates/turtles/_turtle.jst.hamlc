@@ -1,0 +1,19 @@
+- if @currentUser
+  - uv = @model.get('votes').pluck('upvote')[0]
+  %a{:class => 'upvote ' + (if (!_.isUndefined(uv) && uv) then 'red_arrow' else '')}
+    %i.icon-arrow-up
+  %a{:class => 'downvote ' + (if (!_.isUndefined(uv) && !uv) then 'blue_arrow' else '')}
+    %i.icon-arrow-down
+%p.score
+  = @model.get('score')
+%img{:src => @model.get('avatar_thumb_url'), :width => '50', :height => '50'}
+%p.item_text
+  %a{:href => "turtles/#{@model.get('id')}"}
+    = @model.get('name')
+  %span.details
+    Submitted
+    = $.timeago(@model.get('created_at'))
+    by
+    = @model.get('user').name
+  %br
+  = @model.get('description')

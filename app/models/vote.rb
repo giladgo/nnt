@@ -9,14 +9,15 @@ class Vote < ActiveRecord::Base
   before_destroy :remove_score
   before_save :do_not_update
 
+protected
   def do_not_update
   	self.new_record?
   end
 
   def add_score
-  	self.turtle.reload
-	self.turtle.score += (self.upvote ? 1 : -1)
-	self.turtle.save
+    self.turtle.reload
+    self.turtle.score += (self.upvote ? 1 : -1)
+    self.turtle.save
   end
 
   def remove_score

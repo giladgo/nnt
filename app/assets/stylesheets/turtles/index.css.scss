@@ -2,11 +2,18 @@
   padding: 5px;
   margin: 2px;
   background-color: #ddd;
+  height: 50px;
+  max-height: 50px;
 
   p.score {
     display: inline-block;
     width: 25px;
     text-align: center;
+    line-height: 50px;
+  }
+
+  .turtle_img {
+    display: inline-block;
   }
 
   p.item_text {
@@ -25,22 +32,22 @@
 
   a.upvote, a.downvote {
     color: #999;
+    cursor: hand;
+    cursor: pointer;
+    line-height: 50px;
+    display: inline-block;
     &:hover {
       text-decoration: none;
     }
 
     &.blue_arrow {
-      color: #66f; // !important;
+      color: #66f;
     }
 
     &.red_arrow {
-      color: #f66; // !important;
+      color: #f66;
     }
   }
 
-}
-
-.turtle_img {
-  display: inline-block;
 }
 

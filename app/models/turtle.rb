@@ -14,4 +14,8 @@ class Turtle < ActiveRecord::Base
   	v = self.votes.find_by_user_id(user.id)
   	v.present? && !v.upvote
   end
+
+  def avatar_thumb_url
+    avatar.url(:thumb)
+  end
 end

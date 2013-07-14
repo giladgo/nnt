@@ -17,4 +17,10 @@ class UsersController < ApplicationController
       render action: "new"
     end
   end
+
+  def current
+    respond_to do |format|
+      format.json { render json: current_user.to_json(only: [:id, :name])}
+    end
+  end
 end

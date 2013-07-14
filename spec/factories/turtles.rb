@@ -1,10 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :turtles do
-    name "MyString"
-    score ""
-    img_url "MyString"
-    user_id ""
+  factory :turtle do
+    name "Mosh"
+    score 0
+    user_id 0
   end
 end

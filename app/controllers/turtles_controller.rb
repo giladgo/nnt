@@ -1,6 +1,28 @@
 class TurtlesController < ApplicationController
   def index
-    @turtles = Turtle.order("score DESC")
+
+    if authenticated?
+      @turtles = Turtle.includes(:votes).includes(:user).order("score DESC").limit(20)
+      # remove non-current user's votes
+      @turtles.each { |t| t.votes.reject! { |vote| vote.user_id != current_user.id } }
+    else
+      @turtles = Turtle.order("score DESC").limit(20)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json do 
+        options = {
+          only:  [:id, :name, :description, :score, :created_at],
+          methods: [:avatar_thumb_url],
+          include: { :user => { only: :name } }
+        }
+        if authenticated?
+          options[:include][:votes] = { only: [:upvote, :user_id, :turtle_id, :id] }
+        end
+        render json: @turtles.to_json(options) 
+      end
+    end
   end
 
   def show
@@ -8,10 +30,20 @@ class TurtlesController < ApplicationController
   end
 
   def new
+    if not authenticated?
+      head :unauthorized
+      return
+    end
+    
     @turtle = Turtle.new
   end
 
   def create
+    if not authenticated?
+      head :unauthorized
+      return
+    end
+
     @turtle = Turtle.new(params[:turtle])
     @turtle.user = current_user
     if @turtle.save
@@ -19,45 +51,6 @@ class TurtlesController < ApplicationController
     else
       render action: "new"
     end
-  end
-
-  def upvote
-    vote(1)
-  end
-
-  def downvote
-    vote(-1)
-  end
-
-  def clearvote
-    destroy_current_vote
-    
-    @turtle = Turtle.find(params[:id])
-    render json: @turtle, :only => :score
-  end
-  
-  private
-  def destroy_current_vote
-    v = current_user.votes.find_by_turtle_id(params[:id])
-    if v.present?
-      v.destroy
-    end
-  end
-
-  def vote(scoreToAdd)
-    @turtle = Turtle.find(params[:id])
-
-    destroy_current_vote
-    
-    v = Vote.new
-    v.user = current_user
-    v.turtle = @turtle
-    v.upvote = (scoreToAdd > 0)
-
-    v.save
-
-    @turtle.reload
-    render json: @turtle, :only => :score
   end
 
 end
