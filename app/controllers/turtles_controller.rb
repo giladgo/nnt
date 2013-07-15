@@ -1,7 +1,7 @@
 class TurtlesController < ApplicationController
   def index
 
-    if authenticated?
+    if current_user.present?
       @turtles = Turtle.includes(:votes).includes(:user).order("score DESC").limit(20)
       # remove non-current user's votes
       @turtles.each { |t| t.votes.reject! { |vote| vote.user_id != current_user.id } }
@@ -17,7 +17,7 @@ class TurtlesController < ApplicationController
           methods: [:avatar_thumb_url],
           include: { :user => { only: :name } }
         }
-        if authenticated?
+        if current_user.present?
           options[:include][:votes] = { only: [:upvote, :user_id, :turtle_id, :id] }
         end
         render json: @turtles.to_json(options) 
@@ -30,7 +30,7 @@ class TurtlesController < ApplicationController
   end
 
   def new
-    if not authenticated?
+    if not current_user.present?
       head :unauthorized
       return
     end
@@ -39,7 +39,7 @@ class TurtlesController < ApplicationController
   end
 
   def create
-    if not authenticated?
+    if not current_user.authenticated?
       head :unauthorized
       return
     end

@@ -1,5 +1,5 @@
 .turtle_item{ :clear_url => clearvote_turtle_path(turtle) }
-  - if authenticated?
+  - if current_user.present?
     = link_to upvote_turtle_path(turtle), method: :put, :class => ['upvote', turtle.user_upvoted(current_user) ? 'red_arrow' : nil] do
       %i.icon-arrow-up
     = link_to downvote_turtle_path(turtle), method: :put, :class => ['downvote', turtle.user_downvoted(current_user) ? 'blue_arrow' : nil] do

@@ -7,22 +7,23 @@ class Vote < ActiveRecord::Base
 
   before_create :add_score
   before_destroy :remove_score
-  before_save :do_not_update
+  after_find :mark_read_only
 
 protected
-  def do_not_update
-  	self.new_record?
+
+  def mark_read_only
+    self.readonly!
+  end
+
+  def score
+    self.upvote ? 1 : -1
   end
 
   def add_score
-    self.turtle.reload
-    self.turtle.score += (self.upvote ? 1 : -1)
-    self.turtle.save
+    self.turtle.change_score(score)
   end
 
   def remove_score
-  	self.turtle.reload
-  	self.turtle.score -= (self.upvote ? 1 : -1)
-  	self.turtle.save
+    self.turtle.change_score(-score)
   end
 end

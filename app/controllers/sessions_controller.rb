@@ -1,21 +1,20 @@
 class SessionsController < ApplicationController
 
-  def new
-    puts params
+  def login_page
   end
 
-  def create
+  def login
     user = User.find_by_name(params[:name])
     if user and user.authenticate(params[:password])
-      sign_in user
+      authmgr.sign_in user
       redirect_to root_url
     else
       redirect_to login_url
     end
   end
 
-  def destroy
-    logout
+  def logout
+    authmgr.logout
     redirect_to root_path
   end
 

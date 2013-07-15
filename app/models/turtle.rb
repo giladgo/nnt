@@ -5,14 +5,20 @@ class Turtle < ActiveRecord::Base
   attr_accessible :description, :name, :score, :user, :avatar
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "50x50>" }, :default_url => "/assets/:style/missing.png"
 
-  def user_upvoted(user)
-  	v = self.votes.find_by_user_id(user.id)
-  	v.present? && v.upvote
+  def user_upvoted?(user)
+    v = self.votes.find_by_user_id(user.id)
+    v.present? && v.upvote
   end
 
-  def user_downvoted(user)
-  	v = self.votes.find_by_user_id(user.id)
-  	v.present? && !v.upvote
+  def user_downvoted?(user)
+    v = self.votes.find_by_user_id(user.id)
+    v.present? && !v.upvote
+  end
+
+  def change_score(value)
+    self.reload
+    self.score += value
+    self.save
   end
 
   def avatar_thumb_url
