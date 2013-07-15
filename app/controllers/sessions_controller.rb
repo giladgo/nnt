@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
-    puts params
   end
 
-  def create
+  def login
     user = User.find_by_name(params[:name])
     if user and user.authenticate(params[:password])
       sign_in user
@@ -14,7 +13,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
+  def logout
     logout
     redirect_to root_path
   end

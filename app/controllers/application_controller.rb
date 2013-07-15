@@ -7,13 +7,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    (not current_user_id.nil?) ? User.find(current_user_id) : nil
+    @current_user ||= (current_user_id.present?) ? User.find(current_user_id) : nil
   end
 
   def authenticated?
-    not current_user.nil?
+    current_user.present?
   end
 
+  # Move to sessions controller
   # assumption: user has been authenticated
   def sign_in(user)
     session[:user_id] = user.id

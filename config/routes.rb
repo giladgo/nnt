@@ -13,8 +13,8 @@ Nnt::Application.routes.draw do
 
   controller :sessions do
     get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
+    post 'login' => :login
+    delete 'logout' => :logout
   end
 
   root :to => 'turtles#index'
