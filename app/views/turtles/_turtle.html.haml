@@ -4,7 +4,7 @@
       %i.icon-arrow-up
     = link_to downvote_turtle_path(turtle), method: :put, :class => ['downvote', turtle.user_downvoted(current_user) ? 'blue_arrow' : nil] do
       %i.icon-arrow-down
-  
+
   %p.score
     = turtle.score
   = image_tag turtle.avatar.url(:thumb), :class => 'turtle_img'
