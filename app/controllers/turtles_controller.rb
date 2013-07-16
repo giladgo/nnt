@@ -39,7 +39,7 @@ class TurtlesController < ApplicationController
   end
 
   def create
-    if not current_user.authenticated?
+    if not current_user.present?
       head :unauthorized
       return
     end

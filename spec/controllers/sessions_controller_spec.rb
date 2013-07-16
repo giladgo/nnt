@@ -7,7 +7,7 @@ end
 describe SessionsController do
     let(:precreated_user) { FactoryGirl.create(:user) }
 
-    describe :create do
+    describe :login do
 
       context "good login" do
 
@@ -15,12 +15,12 @@ describe SessionsController do
 
 
         it "should create a session" do
-          post :create, good_user_params
-          controller.authenticated?.should be_true
+          post :login, good_user_params
+          controller.current_user.present?.should == true
         end
 
         it "should redirect to root page" do
-          post :create, good_user_params
+          post :login, good_user_params
           controller.should redirect_to(root_url)
         end
 
@@ -31,12 +31,12 @@ describe SessionsController do
         let (:bad_user_params) { { name: precreated_user.name, password: "2352345", password_confirmation: "3245345" } }
 
         it "should not create a session" do
-          post :create, bad_user_params
-          controller.authenticated?.should be_false
+          post :login, bad_user_params
+          controller.current_user.present?.should == false
         end
 
         it "should redirect to the login page" do
-          post :create, bad_user_params
+          post :login, bad_user_params
           controller.should redirect_to(login_url)
         end
       end
@@ -47,19 +47,19 @@ describe SessionsController do
 
       shared_examples_for "logging out works" do
         it "should clear the session" do
-          post :destroy
-          controller.authenticated?.should be_false
+          post :logout
+          controller.current_user.present?.should == false
         end
 
         it "should redirect to root page" do
-          post :destroy
+          post :logout
           controller.should redirect_to(root_url)
         end
       end
 
       context "user already logged in" do
         before do
-          controller.sign_in precreated_user
+          controller.authmgr.sign_in precreated_user
         end
         it_has_behavior "logging out works"
       end
